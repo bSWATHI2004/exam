@@ -1,0 +1,31 @@
+<html><head><title>JavaScript Basics</title></head>
+<body>
+  <h2>JavaScript Example</h2>
+  <div id="output"></div>
+  <script>
+    // Variables
+    let name = "Suresh";
+    let age = 25;
+    // Function
+    function greet(userName) {
+      return "Hello " + userName;
+    }
+    // Object
+    let student = {
+      id: 101,
+      fullName: "Sita Ram"
+    };
+    // Output
+    let out = "";
+    out += "Variables:<br>";
+    out += "Name: " + name + "<br>";
+    out += "Age: " + age + "<br><br>";
+    out += "Function:<br>";
+    out += greet(name) + "<br><br>";
+    out += "Object:<br>";
+    out += "ID: " + student.id + "<br>";
+    out += "Name: " + student.fullName + "<br>";
+    document.getElementById("output").innerHTML = out;
+  </script>
+</body>
+</html>

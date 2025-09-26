@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Easy jQuery Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h3>Register</h3>
+
+  Name: <input type="text" id="name"><br><br>
+  Email: <input type="text" id="email"><br><br>
+  <button id="submit">Submit</button>
+  <p id="message" style="color:red"></p>
+
+  <script>
+    $(document).ready(function() {
+      $("#submit").click(function() {
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+
+        if (name === "") {
+          $("#message").text("Name is required");
+        } else if (email === "") {
+          $("#message").text("Email is required");
+        } else if (email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+          $("#message").text("Enter valid email");
+        } else {
+          $("#message").css("color","green").text("Form submitted! Name: " + name + ", Email: " + email);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
