@@ -25,3 +25,97 @@
   </script>
 </body>
 </html>
+
+SECOND QUES
+Source Code:
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Form</title>
+</head>
+<body>
+  <h1>AJAX Form Example</h1>
+  <form id="contactForm">
+    <label>Name: <input type="text" name="name" required></label><br><br>
+    <label>Email: <input type="email" name="email" required></label><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <h2>Saved Contacts</h2>
+  <ul id="contactList"></ul>
+  <script src="main.js"></script>
+</body>
+</html>
+-------------------------------------------------
+main.js
+const API = "https://jsonplaceholder.typicode.com/users"; // Mock server
+const form = document.getElementById("contactForm");
+const list = document.getElementById("contactList");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  // Send POST request
+  await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  // Fetch updated list
+  const res = await fetch(API);
+  const users = await res.json();
+  render(users);
+});
+function render(users) {
+  list.innerHTML = users.map(u => `<li>${u.name} — ${u.email}</li>`).join("");
+}
+
+
+3rd quesQUES
+
+Source Code:
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Validation</title>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="regForm">
+    <div><label>Name: <input name="name"></label> <span class="err"></span></div>
+    <div><label>Email: <input name="email"></label> <span class="err"></span></div>
+    <div><label>Phone: <input name="phone"></label> <span class="err"></span></div>
+    <div><label>Password: <input type="password" name="password"></label> <span class="err"></span></div>
+    <button type="submit">Register</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="validate.js"></script>
+</body>
+</html>
+validate.js
+$(function(){
+  $("#regForm").on("submit", function(e){
+    e.preventDefault();
+    let valid = true;
+    $(".err").text(""); // clear errors
+    const name = $("input[name='name']").val().trim();
+    const email = $("input[name='email']").val().trim();
+    const phone = $("input[name='phone']").val().trim();
+    const password = $("input[name='password']").val();
+
+    if(name === "") { $("input[name='name']").next().text("Name required"); valid=false; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $("input[name='email']").next().text("Invalid email"); valid=false; }
+    if(!/^\d{10}$/.test(phone)) { $("input[name='phone']").next().text("Phone must be 10 digits"); valid=false; }
+    if(password.length < 6) { $("input[name='password']").next().text("Password must be ≥ 6 chars"); valid=false; }
+    if(valid) alert("Form submitted successfully!");
+  });
+});
+Expected Output:
+•	Errors appear next to invalid fields.
+•	With correct input, an alert confirms form submission.
+Result:
+The dynamic form with jQuery validation was successfully implemented. Client-side validation ensured correct input format before submission.
+
+
